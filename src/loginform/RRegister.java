@@ -5,10 +5,13 @@
  */
 package loginform;
 
+import db.userConnection;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -21,6 +24,14 @@ public class RRegister extends javax.swing.JFrame {
     /**
      * Creates new form RRegister
      */
+    
+        String nom;
+        String id;
+        String tel;
+        String mail;
+        String mps;
+        String cfmps;
+        
     public RRegister() {
         initComponents();
         
@@ -33,6 +44,7 @@ public class RRegister extends javax.swing.JFrame {
         MAIL.setBorder(borderTextField);
         MPS.setBorder(borderTextField);
         CFMPS.setBorder(borderTextField);
+        this.setResizable(false);
         
         
         
@@ -70,10 +82,12 @@ public class RRegister extends javax.swing.JFrame {
 
     
 
-   
+
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
@@ -97,39 +111,101 @@ public class RRegister extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginform/Capture d’écran 2023-07-05 172529.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = -259;
+        gridBagConstraints.ipady = 59;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Inscription");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 433;
+        gridBagConstraints.ipady = 79;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 9, 0, 0);
+        getContentPane().add(jLabel2, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 153));
         jLabel3.setText("Nom complet:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(31, 32, 0, 0);
+        jPanel1.add(jLabel3, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 153));
         jLabel4.setText("Identifiant:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(49, 32, 0, 0);
+        jPanel1.add(jLabel4, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 153));
         jLabel5.setText("Tél:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(51, 32, 0, 0);
+        jPanel1.add(jLabel5, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 153));
         jLabel6.setText("Mail:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(56, 32, 0, 0);
+        jPanel1.add(jLabel6, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 153));
         jLabel7.setText("C.F.M.P:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 32, 0, 0);
+        jPanel1.add(jLabel7, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 153));
         jLabel8.setText("Mot de passe:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 32, 0, 0);
+        jPanel1.add(jLabel8, gridBagConstraints);
 
         NOM.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         NOM.setForeground(new java.awt.Color(153, 153, 153));
@@ -148,6 +224,16 @@ public class RRegister extends javax.swing.JFrame {
                 NOMActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 337;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 15, 0, 15);
+        jPanel1.add(NOM, gridBagConstraints);
 
         IDENTIFIANT.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         IDENTIFIANT.setForeground(new java.awt.Color(153, 153, 153));
@@ -165,6 +251,16 @@ public class RRegister extends javax.swing.JFrame {
                 IDENTIFIANTActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 337;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(48, 15, 0, 15);
+        jPanel1.add(IDENTIFIANT, gridBagConstraints);
 
         TEL.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         TEL.setForeground(new java.awt.Color(153, 153, 153));
@@ -182,6 +278,15 @@ public class RRegister extends javax.swing.JFrame {
                 TELActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 337;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(44, 15, 0, 15);
+        jPanel1.add(TEL, gridBagConstraints);
 
         MAIL.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         MAIL.setForeground(new java.awt.Color(153, 153, 153));
@@ -199,6 +304,15 @@ public class RRegister extends javax.swing.JFrame {
                 MAILActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 337;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(49, 15, 0, 15);
+        jPanel1.add(MAIL, gridBagConstraints);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 51, 153));
@@ -209,6 +323,12 @@ public class RRegister extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 69, 16, 0);
+        jPanel1.add(jButton1, gridBagConstraints);
 
         MPS.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         MPS.setForeground(new java.awt.Color(153, 153, 153));
@@ -222,6 +342,21 @@ public class RRegister extends javax.swing.JFrame {
                 MPSFocusLost(evt);
             }
         });
+        MPS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MPSActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 337;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(49, 15, 0, 15);
+        jPanel1.add(MPS, gridBagConstraints);
 
         CFMPS.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         CFMPS.setForeground(new java.awt.Color(153, 153, 153));
@@ -235,69 +370,38 @@ public class RRegister extends javax.swing.JFrame {
                 CFMPSFocusLost(evt);
             }
         });
+        CFMPS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CFMPSActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 337;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(49, 15, 0, 15);
+        jPanel1.add(CFMPS, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(NOM, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(IDENTIFIANT, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TEL, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(MAIL, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(MPS)
-                    .addComponent(CFMPS))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(193, 193, 193))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(NOM, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(IDENTIFIANT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(TEL, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(MAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(MPS, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CFMPS, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = -337;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 38, 0, 0);
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         jclose.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jclose.setText("X");
         jclose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcloseMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jcloseMouseEntered(evt);
             }
@@ -305,6 +409,14 @@ public class RRegister extends javax.swing.JFrame {
                 jcloseMouseExited(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 18, 0, 0);
+        getContentPane().add(jclose, gridBagConstraints);
 
         jminimize.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jminimize.setText("-");
@@ -319,64 +431,51 @@ public class RRegister extends javax.swing.JFrame {
                 jminimizeMouseExited(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jclose, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jclose, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.ipady = -15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 547, 0, 0);
+        getContentPane().add(jminimize, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void NOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NOMActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_NOMActionPerformed
 
     private void IDENTIFIANTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDENTIFIANTActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_IDENTIFIANTActionPerformed
 
     private void TELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TELActionPerformed
-        // TODO add your handling code here:
+        tel = TEL.getText();
+        System.out.println(tel);
     }//GEN-LAST:event_TELActionPerformed
 
     private void MAILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAILActionPerformed
-        // TODO add your handling code here:
+        mail = MAIL.getText();
+        System.out.println(mail);
     }//GEN-LAST:event_MAILActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        nom = NOM.getText();
+        id = IDENTIFIANT.getText();
+        mps = MPS.getText();
+        boolean cf = CFMPS.getText().equals(MPS.getText())? true:false;
+        
+        if(cf){
+            userConnection.connect();
+            String query = "INSERT INTO users VALUES ('" + id + "', '" + nom + "', '" + mps + "')";
+            userConnection.insertIntoUsers(query);
+            userConnection.closeConnection();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Echec de confitmation du mot de passe", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void NOMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NOMFocusGained
@@ -385,6 +484,7 @@ public class RRegister extends javax.swing.JFrame {
             NOM.setText("");
             NOM.setForeground(Color.BLACK);
         }
+        
     }//GEN-LAST:event_NOMFocusGained
 
     private void NOMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NOMFocusLost
@@ -475,21 +575,27 @@ public class RRegister extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CFMPSFocusLost
 
-    private void jcloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseEntered
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
-        jclose.setBorder(borderLabel);
-        jclose.setForeground(Color.red);
-    }//GEN-LAST:event_jcloseMouseEntered
-
     private void jcloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseExited
         Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
         jclose.setBorder(borderLabel);
         jclose.setForeground(Color.black);
     }//GEN-LAST:event_jcloseMouseExited
 
-    private void jminimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jminimizeMouseClicked
+    private void jcloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseEntered
+        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        jclose.setBorder(borderLabel);
+        jclose.setForeground(Color.red);
+    }//GEN-LAST:event_jcloseMouseEntered
+
+    private void jcloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jcloseMouseClicked
+
+    private void jminimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseExited
+        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
+        jminimize.setBorder(borderLabel);
+        jminimize.setForeground(Color.black);
+    }//GEN-LAST:event_jminimizeMouseExited
 
     private void jminimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseEntered
         Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.green);
@@ -497,11 +603,17 @@ public class RRegister extends javax.swing.JFrame {
         jminimize.setForeground(Color.green);
     }//GEN-LAST:event_jminimizeMouseEntered
 
-    private void jminimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseExited
-         Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
-        jminimize.setBorder(borderLabel);
-        jminimize.setForeground(Color.black);
-    }//GEN-LAST:event_jminimizeMouseExited
+    private void jminimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jminimizeMouseClicked
+
+    private void MPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MPSActionPerformed
+
+    }//GEN-LAST:event_MPSActionPerformed
+
+    private void CFMPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CFMPSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CFMPSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -531,6 +643,7 @@ public class RRegister extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        userConnection.connect();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RRegister().setVisible(true);

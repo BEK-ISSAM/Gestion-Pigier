@@ -40,20 +40,7 @@ public class login extends javax.swing.JFrame {
   /**
      * Cette méthode change la position de l'interface entre droite et gauche.
      */
-    private void toggleInterfacePosition() {
-        if (isInterfacePositionLeft) {
-            // Positionner l'interface à droite
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int screenWidth = screenSize.width;
-            int screenHeight = screenSize.height;
-            this.setLocation(screenWidth - this.getWidth(), 0);
-        } else {
-            // Positionner l'interface à gauche
-            this.setLocation(0, 0);
-        }
-        // Inverser la valeur du drapeau
-        isInterfacePositionLeft = !isInterfacePositionLeft;
-    }
+   
 
     // ... le reste du code de votre interface ...
 
