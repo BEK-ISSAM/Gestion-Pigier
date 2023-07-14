@@ -12,6 +12,7 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -206,6 +207,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="ENTRER VOTRE NOM COMPLET..."/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="name" type="java.lang.String" value="Nom_complet" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="NOMFocusGained"/>
@@ -227,6 +229,7 @@
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CHOISIR VOTRE IDENTIFIANT..."/>
+            <Property name="name" type="java.lang.String" value="Identifiant" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="IDENTIFIANTFocusGained"/>
@@ -248,6 +251,7 @@
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ENTRER VOTRE TEL..."/>
+            <Property name="name" type="java.lang.String" value="tel" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TELFocusGained"/>
@@ -269,6 +273,7 @@
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ENTRER VOTRE MAIL..."/>
+            <Property name="name" type="java.lang.String" value="mail" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MAILFocusGained"/>
@@ -311,6 +316,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="ENTRER VOTRE MOT DE PASSE..."/>
             <Property name="echoChar" type="char" value="\u0000" containsInvalidXMLChars="true"/>
+            <Property name="name" type="java.lang.String" value="mot_de_passe" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MPSFocusGained"/>
@@ -333,6 +339,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="CONFIRMER VOTRE  MOT DE PASSE..."/>
             <Property name="echoChar" type="char" value="\u0000" containsInvalidXMLChars="true"/>
+            <Property name="name" type="java.lang.String" value="confirmation_mtp" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="CFMPSFocusGained"/>

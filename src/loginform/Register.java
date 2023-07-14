@@ -10,7 +10,8 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import java.awt.Font;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -32,18 +33,12 @@ public class Register extends javax.swing.JFrame {
         String mail;
         String mps;
         String cfmps;
-        HashMap<String, String> textFields = new HashMap<>();
+        Map<javax.swing.JTextField, String> textFields = new LinkedHashMap<>();
 
        
         
     public Register() {
         initComponents();
-       /* textFields.add(nom);
-        textFields.add(id);
-        textFields.add(tel);
-        textFields.add(mail);
-        textFields.add(mps);
-        textFields.add(cfmps);*/
 
         
         Border borderPanel = BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(61, 89, 171));
@@ -122,6 +117,7 @@ public class Register extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginform/Capture d’écran 2023-07-05 172529.png"))); // NOI18N
@@ -203,6 +199,7 @@ public class Register extends javax.swing.JFrame {
         NOM.setForeground(new java.awt.Color(153, 153, 153));
         NOM.setText("ENTRER VOTRE NOM COMPLET...");
         NOM.setToolTipText("");
+        NOM.setName("Nom_complet"); // NOI18N
         NOM.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 NOMFocusGained(evt);
@@ -230,6 +227,7 @@ public class Register extends javax.swing.JFrame {
         IDENTIFIANT.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         IDENTIFIANT.setForeground(new java.awt.Color(153, 153, 153));
         IDENTIFIANT.setText("CHOISIR VOTRE IDENTIFIANT...");
+        IDENTIFIANT.setName("Identifiant"); // NOI18N
         IDENTIFIANT.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 IDENTIFIANTFocusGained(evt);
@@ -257,6 +255,7 @@ public class Register extends javax.swing.JFrame {
         TEL.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         TEL.setForeground(new java.awt.Color(153, 153, 153));
         TEL.setText("ENTRER VOTRE TEL...");
+        TEL.setName("tel"); // NOI18N
         TEL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 TELFocusGained(evt);
@@ -283,6 +282,7 @@ public class Register extends javax.swing.JFrame {
         MAIL.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         MAIL.setForeground(new java.awt.Color(153, 153, 153));
         MAIL.setText("ENTRER VOTRE MAIL...");
+        MAIL.setName("mail"); // NOI18N
         MAIL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 MAILFocusGained(evt);
@@ -326,6 +326,7 @@ public class Register extends javax.swing.JFrame {
         MPS.setForeground(new java.awt.Color(153, 153, 153));
         MPS.setText("ENTRER VOTRE MOT DE PASSE...");
         MPS.setEchoChar('\u0000');
+        MPS.setName("mot_de_passe"); // NOI18N
         MPS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 MPSFocusGained(evt);
@@ -354,6 +355,7 @@ public class Register extends javax.swing.JFrame {
         CFMPS.setForeground(new java.awt.Color(153, 153, 153));
         CFMPS.setText("CONFIRMER VOTRE  MOT DE PASSE...");
         CFMPS.setEchoChar('\u0000');
+        CFMPS.setName("confirmation_mtp"); // NOI18N
         CFMPS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 CFMPSFocusGained(evt);
@@ -469,26 +471,27 @@ public class Register extends javax.swing.JFrame {
         tel = TEL.getText();
         cfmps = CFMPS.getText();
         boolean cf = CFMPS.getText().equals(MPS.getText())? true:false;
-        boolean isFieldEmpty = IDENTIFIANT.getText().isEmpty() || NOM.getText().isEmpty() || TEL.getText().isEmpty() || MAIL.getText().isEmpty() || MPS.getText().isEmpty() || CFMPS.getText().isEmpty();
+        textFields.put(NOM, "ENTRER VOTRE NOM COMPLET...");
+        textFields.put(IDENTIFIANT, "CHOISIR VOTRE IDENTIFIANT...");
+        textFields.put(TEL, "ENTRER VOTRE TEL...");
+        textFields.put(MAIL, "ENTRER VOTRE MAIL...");
+        textFields.put(MPS, "ENTRER VOTRE MOT DE PASSE...");
+        textFields.put(CFMPS, "CONFIRMER VOTRE  MOT DE PASSE...");
+        String emptyFields = "Fields:\n";
         
-        /*for(String s : textFields){
-            if(s.isEmpty() || s.equals())
-        }*/
-        if(nom.isEmpty() || nom.equals("ENTRER VOTRE NOM COMPLET..."))
-                JOptionPane.showMessageDialog(this, "NOM Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-        if(id.isEmpty() || id.equals("CHOISIR VOTRE IDENTIFIANT..."))
-                JOptionPane.showMessageDialog(this, "Id Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-        if(tel.isEmpty() || tel.equals("ENTRER VOTRE TEL..."))
-                JOptionPane.showMessageDialog(this, "Tel Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-        if(mail.isEmpty() || mail.equals("ENTRER VOTRE MAIL..."))
-                JOptionPane.showMessageDialog(this, "Mail Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-        if(mps.isEmpty() || mps.equals("ENTRER VOTRE MOT DE PASSE..."))
-                JOptionPane.showMessageDialog(this, "MOT DE PASSE Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-        if(cfmps.isEmpty() || cfmps.equals("CONFIRMER VOTRE  MOT DE PASSE..."))
-                JOptionPane.showMessageDialog(this, "CONFIRMATION Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        for(Map.Entry<javax.swing.JTextField, String> entry : textFields.entrySet()){
+            if(entry.getKey().getText().equals(entry.getValue())){
+                emptyFields += entry.getKey().getName() + "\n";
+            }
+        }
+        emptyFields += "were left empty";
+        System.out.println(emptyFields.length());
+        if(emptyFields.length() > 23)
+            JOptionPane.showMessageDialog(this, emptyFields, "Error", JOptionPane.ERROR_MESSAGE);
+
         
-        
-        if(cf && !isFieldEmpty){
+        if(cf){
+            if((emptyFields.length() <= 23)){
 
             userConnection.connect();
             String query = "INSERT INTO users (id, nom_complet, mot_de_passe, mail, tel) VALUES ('" + id + "', '" + nom + "', '" + mps + "','" + mail + "', '" + tel + "')";
@@ -499,6 +502,7 @@ public class Register extends javax.swing.JFrame {
             login1.setVisible(true);
             login1.setLocationRelativeTo(null);
             this.dispose();
+            }
         }
         else{
             JOptionPane.showMessageDialog(this, "Echec de confitmation du mot de passe", "Error", JOptionPane.ERROR_MESSAGE);
