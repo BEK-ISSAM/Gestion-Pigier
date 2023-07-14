@@ -1,5 +1,6 @@
 package db;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +18,8 @@ public class userConnection {
     public static void connect() {
         try {
             // db parameters
-            String url = "jdbc:sqlite:src/db/pigierDB";
+            String dbPath = "src/db/pigierDB";
+            String url = "jdbc:sqlite:" + new File(dbPath).getAbsolutePath();
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
