@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package loginform;
+import db.userConnection;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -17,22 +24,25 @@ import javax.swing.border.Border;
  */
 public class login extends javax.swing.JFrame {
  
-  
+        String login;
+        String login_pwd;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
      
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
-        txtusername.setBackground(new java.awt.Color(0,0,0,1));
-        txtpassword.setBackground(new java.awt.Color(0,0,0,1));
+        login_id.setBackground(new java.awt.Color(0,0,0,1));
+        login_password.setBackground(new java.awt.Color(0,0,0,1));
         
-     Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
+     Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.white);
     jLabel2.setBorder(borderLabel);
     lblminimize.setBorder(borderLabel);
      Border borderTextField= BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
-    txtusername.setBorder(borderTextField);
-    txtpassword.setBorder(borderTextField);
+    login_id.setBorder(borderTextField);
+    login_password.setBorder(borderTextField);
    
     }
     
@@ -65,17 +75,17 @@ public class login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtusername = new javax.swing.JTextField();
+        login_id = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtpassword = new javax.swing.JPasswordField();
+        login_password = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
         disable = new javax.swing.JLabel();
         show = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        LOGIN = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         lblminimize = new javax.swing.JLabel();
@@ -95,7 +105,7 @@ public class login extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 51, 153));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Created By Junior Programmer");
+        jLabel12.setText("Created By EMSI students");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 500, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo-pigier-tanger-min.png"))); // NOI18N
@@ -106,6 +116,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setBackground(new java.awt.Color(255, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -135,10 +146,15 @@ public class login extends javax.swing.JFrame {
         jLabel5.setText("Identifiant");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 123, 341, -1));
 
-        txtusername.setFont(txtusername.getFont().deriveFont(txtusername.getFont().getSize()+2f));
-        txtusername.setForeground(new java.awt.Color(255, 255, 255));
-        txtusername.setBorder(null);
-        jPanel2.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 140, 240, 30));
+        login_id.setFont(login_id.getFont().deriveFont(login_id.getFont().getSize()+2f));
+        login_id.setForeground(new java.awt.Color(255, 255, 255));
+        login_id.setBorder(null);
+        login_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_idActionPerformed(evt);
+            }
+        });
+        jPanel2.add(login_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 140, 240, 30));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("_________________________________________");
@@ -153,11 +169,16 @@ public class login extends javax.swing.JFrame {
         jLabel8.setText("Mot de passe");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 192, 341, -1));
 
-        txtpassword.setFont(txtpassword.getFont().deriveFont(txtpassword.getFont().getSize()+2f));
-        txtpassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtpassword.setBorder(null);
-        txtpassword.setCaretColor(new java.awt.Color(255, 255, 255));
-        jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 30));
+        login_password.setFont(login_password.getFont().deriveFont(login_password.getFont().getSize()+2f));
+        login_password.setForeground(new java.awt.Color(255, 255, 255));
+        login_password.setBorder(null);
+        login_password.setCaretColor(new java.awt.Color(255, 255, 255));
+        login_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_passwordActionPerformed(evt);
+            }
+        });
+        jPanel2.add(login_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 30));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("_________________________________________");
@@ -186,7 +207,11 @@ public class login extends javax.swing.JFrame {
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(199, 226, 255));
         jCheckBox1.setText("Remember Password");
-        jCheckBox1.setOpaque(false);
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 261, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -196,17 +221,16 @@ public class login extends javax.swing.JFrame {
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 261, 160, 27));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 153));
-        jButton1.setText("CONNECTER");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        LOGIN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LOGIN.setForeground(new java.awt.Color(0, 51, 153));
+        LOGIN.setText("SE CONNECTER");
+        LOGIN.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        LOGIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LOGINActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 306, 341, 40));
+        jPanel2.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 306, 341, 40));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,7 +280,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
-        txtpassword.setEchoChar((char)0);
+        login_password.setEchoChar((char)0);
         disable.setVisible(false);
         disable.setEnabled(false);
         show.setEnabled(true);
@@ -264,7 +288,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_disableMouseClicked
 
     private void showMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMouseClicked
-        txtpassword.setEchoChar((char)8226);
+        login_password.setEchoChar((char)8226);
         disable.setVisible(true);
         disable.setEnabled(true);
         show.setEnabled(false);
@@ -284,26 +308,51 @@ public class login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
+        userConnection.connect();
+        login = login_id.getText();
+        login_pwd = login_password.getText();
+        try {
+            String verificationQuery = "SELECT id, mot_de_passe FROM users WHERE id = '" + login + "' AND mot_de_passe = '" + login_pwd + "'";
+            rs = userConnection.selectFromUsers(verificationQuery);
+
+            if (rs.next()) {
+                String id = rs.getString("id");
+                String password = rs.getString("mot_de_passe");
+
+                if (id.equals(login) && password.equals(login_pwd)) {
+                    JOptionPane.showMessageDialog(this, "Succès d'authentification!", "Authentication Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Informations non correctes. Réessayer!", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Informations non correctes. Réessayer!", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        userConnection.closeConnection();
+    }//GEN-LAST:event_LOGINActionPerformed
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black);
         jLabel2.setBorder(borderLabel);
-        jLabel2.setForeground(Color.red);
+        jLabel2.setForeground(Color.black);
+        jLabel2.setOpaque(true);
     }//GEN-LAST:event_jLabel2MouseEntered
 
     private void lblminimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblminimizeMouseEntered
          Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.green);
         lblminimize.setBorder(borderLabel);
         lblminimize.setForeground(Color.green);
+       
     }//GEN-LAST:event_lblminimizeMouseEntered
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-         Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
+         Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black);
         jLabel2.setBorder(borderLabel);
         jLabel2.setForeground(Color.white);
+         jLabel2.setOpaque(false);
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void lblminimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblminimizeMouseExited
@@ -323,6 +372,19 @@ public class login extends javax.swing.JFrame {
         register.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
+
+
+    private void login_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_idActionPerformed
+        
+    }//GEN-LAST:event_login_idActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
+        
+    }//GEN-LAST:event_login_passwordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,14 +417,13 @@ public class login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new login().setVisible(true);
-                System.out.println("Yassir");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LOGIN;
     private javax.swing.JLabel disable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -379,8 +440,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblminimize;
+    private javax.swing.JTextField login_id;
+    private javax.swing.JPasswordField login_password;
     private javax.swing.JLabel show;
-    private javax.swing.JPasswordField txtpassword;
-    private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 }

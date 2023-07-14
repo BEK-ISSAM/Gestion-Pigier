@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import java.awt.Font;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -31,9 +32,19 @@ public class RRegister extends javax.swing.JFrame {
         String mail;
         String mps;
         String cfmps;
+        HashMap<String, String> textFields = new HashMap<>();
+
+       
         
     public RRegister() {
         initComponents();
+       /* textFields.add(nom);
+        textFields.add(id);
+        textFields.add(tel);
+        textFields.add(mail);
+        textFields.add(mps);
+        textFields.add(cfmps);*/
+
         
         Border borderPanel = BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(61, 89, 171));
         jLabel2.setBorder(borderPanel);
@@ -111,34 +122,15 @@ public class RRegister extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginform/Capture d’écran 2023-07-05 172529.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = -259;
-        gridBagConstraints.ipady = 59;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Inscription");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 433;
-        gridBagConstraints.ipady = 79;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 9, 0, 0);
-        getContentPane().add(jLabel2, gridBagConstraints);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -386,16 +378,6 @@ public class RRegister extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(49, 15, 0, 15);
         jPanel1.add(CFMPS, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.ipadx = -337;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 38, 0, 0);
-        getContentPane().add(jPanel1, gridBagConstraints);
-
         jclose.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jclose.setText("X");
         jclose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -409,14 +391,6 @@ public class RRegister extends javax.swing.JFrame {
                 jcloseMouseExited(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(16, 18, 0, 0);
-        getContentPane().add(jclose, gridBagConstraints);
 
         jminimize.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jminimize.setText("-");
@@ -431,14 +405,41 @@ public class RRegister extends javax.swing.JFrame {
                 jminimizeMouseExited(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 7;
-        gridBagConstraints.ipady = -15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(16, 547, 0, 0);
-        getContentPane().add(jminimize, gridBagConstraints);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(538, 538, 538)
+                        .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jclose, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jclose))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -452,8 +453,7 @@ public class RRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_IDENTIFIANTActionPerformed
 
     private void TELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TELActionPerformed
-        tel = TEL.getText();
-        System.out.println(tel);
+
     }//GEN-LAST:event_TELActionPerformed
 
     private void MAILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAILActionPerformed
@@ -465,13 +465,40 @@ public class RRegister extends javax.swing.JFrame {
         nom = NOM.getText();
         id = IDENTIFIANT.getText();
         mps = MPS.getText();
+        mail = MAIL.getText();
+        tel = TEL.getText();
+        cfmps = CFMPS.getText();
         boolean cf = CFMPS.getText().equals(MPS.getText())? true:false;
+        boolean isFieldEmpty = IDENTIFIANT.getText().isEmpty() || NOM.getText().isEmpty() || TEL.getText().isEmpty() || MAIL.getText().isEmpty() || MPS.getText().isEmpty() || CFMPS.getText().isEmpty();
         
-        if(cf){
+        /*for(String s : textFields){
+            if(s.isEmpty() || s.equals())
+        }*/
+        if(nom.isEmpty() || nom.equals("ENTRER VOTRE NOM COMPLET..."))
+                JOptionPane.showMessageDialog(this, "NOM Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if(id.isEmpty() || id.equals("CHOISIR VOTRE IDENTIFIANT..."))
+                JOptionPane.showMessageDialog(this, "Id Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if(tel.isEmpty() || tel.equals("ENTRER VOTRE TEL..."))
+                JOptionPane.showMessageDialog(this, "Tel Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if(mail.isEmpty() || mail.equals("ENTRER VOTRE MAIL..."))
+                JOptionPane.showMessageDialog(this, "Mail Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if(mps.isEmpty() || mps.equals("ENTRER VOTRE MOT DE PASSE..."))
+                JOptionPane.showMessageDialog(this, "MOT DE PASSE Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if(cfmps.isEmpty() || cfmps.equals("CONFIRMER VOTRE  MOT DE PASSE..."))
+                JOptionPane.showMessageDialog(this, "CONFIRMATION Text field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        
+        if(cf && !isFieldEmpty){
+
             userConnection.connect();
-            String query = "INSERT INTO users VALUES ('" + id + "', '" + nom + "', '" + mps + "')";
+            String query = "INSERT INTO users (id, nom_complet, mot_de_passe, mail, tel) VALUES ('" + id + "', '" + nom + "', '" + mps + "','" + mail + "', '" + tel + "')";
             userConnection.insertIntoUsers(query);
             userConnection.closeConnection();
+            
+            login login1 = new login();
+            login1.setVisible(true);
+            login1.setLocationRelativeTo(null);
+            this.dispose();
         }
         else{
             JOptionPane.showMessageDialog(this, "Echec de confitmation du mot de passe", "Error", JOptionPane.ERROR_MESSAGE);

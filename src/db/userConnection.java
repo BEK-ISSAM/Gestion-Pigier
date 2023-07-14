@@ -2,25 +2,25 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 
 public class userConnection {
         static Connection conn = null;
-    public static void connect() {
 
+    public static Connection getConn() {
+        return conn;
+    }
+        
+    public static void connect() {
         try {
             // db parameters
             String url = "jdbc:sqlite:src/db/pigierDB";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-            
             System.out.println("Connection to SQLite has been established.");
-            
-            
-            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -29,15 +29,24 @@ public class userConnection {
     public static void insertIntoUsers(String sql){
           try {
             Statement statement = conn.createStatement();
-
-            // Execute the insert statement
             statement.executeUpdate(sql);
-
             statement.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static ResultSet selectFromUsers(String sql){
+        ResultSet resultSet = null;
+        try {
+            Statement statement = conn.createStatement();
+            resultSet = statement.executeQuery(sql);
+            
+        }catch (SQLException e){
+                e.printStackTrace();
+            }
+        return resultSet;
     }
     
     public static void closeConnection(){
