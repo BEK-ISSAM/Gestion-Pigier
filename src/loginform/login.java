@@ -367,7 +367,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblminimizeMouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        RRegister register = new RRegister();
+        Register register = new Register();
         register.setVisible(true);
         register.setLocationRelativeTo(null);
         this.dispose();
