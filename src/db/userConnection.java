@@ -26,25 +26,27 @@ public class userConnection {
         }
     }
     
-    public static void insertIntoUsers(String sql){
+    public static void insertIntoDB(String sql){
           try {
             Statement statement = conn.createStatement();
             statement.executeUpdate(sql);
             statement.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+              System.out.println("DB insert Error: " + e.getMessage());
+              System.out.println("Cause: " + e.getCause());
         }
     }
     
-    public static ResultSet selectFromUsers(String sql){
+    public static ResultSet selectFromDB(String sql){
         ResultSet resultSet = null;
         try {
             Statement statement = conn.createStatement();
             resultSet = statement.executeQuery(sql);
             
         }catch (SQLException e){
-                e.printStackTrace();
+                System.out.println("DB select Error: " + e.getMessage());
+                System.out.println("Cause: " + e.getCause());
             }
         return resultSet;
     }
@@ -52,6 +54,7 @@ public class userConnection {
     public static void closeConnection(){
           try {
             conn.close();
+              System.out.println("Connection to SQLite has been closed.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

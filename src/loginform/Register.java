@@ -39,7 +39,7 @@ public class Register extends javax.swing.JFrame {
         
     public Register() {
         initComponents();
-
+        this.setResizable(false);
         
         Border borderPanel = BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(61, 89, 171));
         jLabel2.setBorder(borderPanel);
@@ -50,24 +50,14 @@ public class Register extends javax.swing.JFrame {
         MAIL.setBorder(borderTextField);
         MPS.setBorder(borderTextField);
         CFMPS.setBorder(borderTextField);
-        this.setResizable(false);
         
         
-        
-        //close and minimize
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
-    jclose.setBorder(borderLabel);
-    jminimize.setBorder(borderLabel);
-     
-        
-       
-        
-        
-        }
+        Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.white);
+        jclose.setBorder(borderLabel);
+        jminimize.setBorder(borderLabel);
+    }
     
-    
-    
-    
+
         public void addplaceholderStyle(JTextField textField){
         
         Font font = textField.getFont();
@@ -83,13 +73,7 @@ public class Register extends javax.swing.JFrame {
         textField.setFont(font);
         textField.setForeground(Color.BLACK);//font color
         }
-        
-        
 
-    
-
-
-        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,6 +111,7 @@ public class Register extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 51, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Inscription");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -308,7 +293,8 @@ public class Register extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 51, 153));
-        jButton1.setText("INSCRIRE");
+        jButton1.setText("S'INSCRIRE");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,7 +367,12 @@ public class Register extends javax.swing.JFrame {
         jPanel1.add(CFMPS, gridBagConstraints);
 
         jclose.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jclose.setText("X");
+        jclose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jclose.setText("x");
+        jclose.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jclose.setMaximumSize(new java.awt.Dimension(15, 30));
+        jclose.setMinimumSize(new java.awt.Dimension(15, 30));
+        jclose.setPreferredSize(new java.awt.Dimension(15, 30));
         jclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jcloseMouseClicked(evt);
@@ -395,7 +386,12 @@ public class Register extends javax.swing.JFrame {
         });
 
         jminimize.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jminimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jminimize.setText("-");
+        jminimize.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jminimize.setMaximumSize(new java.awt.Dimension(15, 30));
+        jminimize.setMinimumSize(new java.awt.Dimension(15, 30));
+        jminimize.setPreferredSize(new java.awt.Dimension(15, 30));
         jminimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jminimizeMouseClicked(evt);
@@ -417,15 +413,16 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(538, 538, 538)
-                        .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jclose, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jclose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,11 +430,10 @@ public class Register extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jclose))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jclose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jminimize, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -489,13 +485,12 @@ public class Register extends javax.swing.JFrame {
         if(emptyFields.length() > 23)
             JOptionPane.showMessageDialog(this, emptyFields, "Error", JOptionPane.ERROR_MESSAGE);
 
-        
         if(cf){
             if((emptyFields.length() <= 23)){
 
             userConnection.connect();
             String query = "INSERT INTO users (id, nom_complet, mot_de_passe, mail, tel) VALUES ('" + id + "', '" + nom + "', '" + mps + "','" + mail + "', '" + tel + "')";
-            userConnection.insertIntoUsers(query);
+            userConnection.insertIntoDB(query);
             userConnection.closeConnection();
             
             login login1 = new login();
@@ -607,15 +602,19 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_CFMPSFocusLost
 
     private void jcloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseExited
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
+        Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK);
         jclose.setBorder(borderLabel);
-        jclose.setForeground(Color.black);
+        jclose.setForeground(Color.BLACK);
+        jclose.setOpaque(false);
     }//GEN-LAST:event_jcloseMouseExited
 
     private void jcloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseEntered
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK);
         jclose.setBorder(borderLabel);
-        jclose.setForeground(Color.red);
+        jclose.setForeground(Color.BLACK);
+        jclose.setBackground(Color.RED);
+        jclose.setOpaque(true);
+        
     }//GEN-LAST:event_jcloseMouseEntered
 
     private void jcloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcloseMouseClicked
@@ -623,15 +622,18 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jcloseMouseClicked
 
     private void jminimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseExited
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
+        Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black);
         jminimize.setBorder(borderLabel);
         jminimize.setForeground(Color.black);
+        jminimize.setOpaque(false);
     }//GEN-LAST:event_jminimizeMouseExited
 
     private void jminimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseEntered
-        Border borderLabel = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.green);
+        Border borderLabel = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK);
         jminimize.setBorder(borderLabel);
-        jminimize.setForeground(Color.green);
+        jminimize.setForeground(Color.BLACK);
+        jminimize.setBackground(new Color(192,192,192));
+        jminimize.setOpaque(true);
     }//GEN-LAST:event_jminimizeMouseEntered
 
     private void jminimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jminimizeMouseClicked
