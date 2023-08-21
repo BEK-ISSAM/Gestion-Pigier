@@ -1,25 +1,49 @@
 package student;
 
 import db.userConnection;
-import java.awt.Color;
 import static java.lang.Float.parseFloat;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.TableView;
 
 public class Matieres extends javax.swing.JFrame {
-    String matiere, prof;
-    float coef;
-    DefaultTableModel tableMat;
+    private static JFrame homeFrame;
+    DefaultTableModel tableMat = new DefaultTableModel();
     Object[] rowDataMatiere;
+    ResultSet matiereResultSet = null;
+    int selectedRowTableMatieres;
 
-    public Matieres() {
+    public Matieres(JFrame frame) {
+        this.homeFrame = frame;
         initComponents();
+        tableMat = (DefaultTableModel) tableMatieres.getModel();
+        getMatieresFromDB();
+    }
+    
+    public void getMatieresFromDB(){
+        userConnection.connect();
+        String matiereVerificationQuery = "SELECT * FROM matieres";
+        matiereResultSet = userConnection.selectFromDB(matiereVerificationQuery);
+        String mat, prf;
+        float cf;
+        try{
+            while(matiereResultSet.next()){
+                mat = matiereResultSet.getString("nom_matiere");
+                prf = matiereResultSet.getString("professeur");
+                cf = parseFloat(matiereResultSet.getString("coefficient"));
+                tableMat = (DefaultTableModel) tableMatieres.getModel();
+                rowDataMatiere = new Object[]{mat, cf, prf};
+                tableMat.addRow(rowDataMatiere);
+            }
+        } catch(SQLException sqlex){
+            System.out.println("erreur de base de donnees!");
+        }
+        userConnection.closeConnection();
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +58,8 @@ public class Matieres extends javax.swing.JFrame {
         coefMatiere = new javax.swing.JTextField();
         nomProfMatiere = new javax.swing.JTextField();
         ajouterMatiere = new javax.swing.JButton();
+        fermerMatieres = new javax.swing.JButton();
+        supprimerMatiere = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMatieres = new javax.swing.JTable();
@@ -43,6 +69,26 @@ public class Matieres extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setLocation(new java.awt.Point(600, 300));
         setResizable(false);
+        addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                formHierarchyChanged(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                formPropertyChange(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -72,6 +118,7 @@ public class Matieres extends javax.swing.JFrame {
         });
 
         coefMatiere.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        coefMatiere.setToolTipText("");
 
         nomProfMatiere.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
@@ -88,6 +135,28 @@ public class Matieres extends javax.swing.JFrame {
             }
         });
 
+        fermerMatieres.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        fermerMatieres.setText("Fermer");
+        fermerMatieres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fermerMatieresMouseClicked(evt);
+            }
+        });
+
+        supprimerMatiere.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        supprimerMatiere.setText("Supprimer");
+        supprimerMatiere.setEnabled(false);
+        supprimerMatiere.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supprimerMatiereMouseClicked(evt);
+            }
+        });
+        supprimerMatiere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supprimerMatiereActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -99,15 +168,21 @@ public class Matieres extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomProfMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(coefMatiere, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                            .addComponent(nomMatiere, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(37, 37, 37)
-                        .addComponent(ajouterMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(coefMatiere, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                                .addComponent(nomMatiere, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(nomProfMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(188, 188, 188))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ajouterMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(supprimerMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fermerMatieres, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,13 +194,17 @@ public class Matieres extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(coefMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ajouterMatiere))
+                    .addComponent(coefMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nomProfMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ajouterMatiere)
+                    .addComponent(supprimerMatiere)
+                    .addComponent(fermerMatieres))
+                .addGap(18, 18, 18))
         );
 
         tableMatieres.setBackground(new java.awt.Color(204, 204, 204));
@@ -153,10 +232,24 @@ public class Matieres extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableMatieres.setFillsViewportHeight(true);
         tableMatieres.setGridColor(new java.awt.Color(0, 0, 0));
         tableMatieres.setSelectionBackground(new java.awt.Color(0, 51, 102));
         tableMatieres.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableMatieres.setShowGrid(true);
+        tableMatieres.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tableMatieresFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tableMatieresFocusLost(evt);
+            }
+        });
+        tableMatieres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMatieresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableMatieres);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -169,7 +262,7 @@ public class Matieres extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,53 +288,114 @@ public class Matieres extends javax.swing.JFrame {
     }//GEN-LAST:event_nomMatiereActionPerformed
 
     private void ajouterMatiereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajouterMatiereMouseClicked
+        String matiere = null;
+        String prof = null;
+        float coef = 0;
         try{
-            matiere = nomMatiere.getText().toUpperCase();
-            prof = nomProfMatiere.getText().toUpperCase();
+            matiere = nomMatiere.getText();
+            prof = nomProfMatiere.getText();
             coef = parseFloat(coefMatiere.getText());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            System.out.println("Cause: " + e.getCause());
-            System.out.println("-----------------------------------");
+        } catch (Exception exc){
+            System.out.println("Error: " + exc.getMessage());
+            System.out.println("Cause: " + exc.getCause());
+            System.out.println("----------------------------------");
         }
-        tableMat = (DefaultTableModel) tableMatieres.getModel();
-        rowDataMatiere = new Object[]{matiere, coef, prof};
-        boolean matiereFound = false;
-        for(int i=0; i<tableMat.getRowCount(); i++){
-            if(matiere.equals(tableMat.getValueAt(i, 0).toString().toUpperCase())){
-                matiereFound = true;
-            }
-        }
-        if (!matiereFound && !matiere.equals("") && coef != 0 && !prof.equals(""))
-            tableMat.addRow(rowDataMatiere);
-        else if (coef == 0 || matiere.equals("") || prof.equals(""))
-            JOptionPane.showMessageDialog(this, "Champ(s) vides ou invalides!", "Avertissement", JOptionPane.WARNING_MESSAGE);
-        else if (matiereFound)
-            JOptionPane.showMessageDialog(this, "Matiere deja ajoutee!", "Avertissement", JOptionPane.WARNING_MESSAGE);
-
-        String mat, prf;
-        float cf;
-        String query;
+        
         try{
-            for(Vector row: tableMat.getDataVector()){
+            boolean matiereFound = false;
+            for(int i=0; i<tableMat.getRowCount(); i++){
+                if(matiere.equals(tableMat.getValueAt(i, 0).toString())){
+                    matiereFound = true;
+                }
+            }
+            if (!matiereFound && !matiere.equals("") && coef != 0 && !prof.equals("")){
+                rowDataMatiere = new Object[]{matiere, coef, prof};
+                tableMat.addRow(rowDataMatiere);
                 userConnection.connect();
-                mat = row.get(0).toString();
-                cf = parseFloat(row.get(1).toString());
-                prf = row.get(2).toString();
-                query = "INSERT INTO matieres (nom_matiere, coefficient, professeur) VALUES ('" + mat + "', '" + cf + "', '" + prf + "')";
+                String query = "INSERT INTO matieres (nom_matiere, coefficient, professeur) VALUES ('" + matiere + "', '" + coef + "', '" + prof + "')";
                 userConnection.insertIntoDB(query);
                 userConnection.closeConnection();
+                Home.comboBoxMatieres.addItem(matiere);
             }
-        }   catch(Exception ex){
+            else if (coef == 0 || matiere.equals("") || prof.equals(""))
+                JOptionPane.showMessageDialog(this, "Champ(s) vides ou invalides!", "Avertissement", JOptionPane.WARNING_MESSAGE);
+            else if (matiereFound)
+                JOptionPane.showMessageDialog(this, "Matiere deja ajoutee!", "Avertissement", JOptionPane.WARNING_MESSAGE);
+        } 
+        catch(Exception ex){
                 System.out.println("Error: " + ex.getMessage());
                 System.out.println("Cause: " + ex.getCause());
-                }
+            }
         
     }//GEN-LAST:event_ajouterMatiereMouseClicked
 
     private void ajouterMatiereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMatiereActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajouterMatiereActionPerformed
+
+    private void supprimerMatiereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerMatiereActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_supprimerMatiereActionPerformed
+
+    private void tableMatieresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMatieresMouseClicked
+        
+    }//GEN-LAST:event_tableMatieresMouseClicked
+
+    private void tableMatieresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableMatieresFocusGained
+        tableMatieres.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            // Enable the delete button only when a row is selected
+            supprimerMatiere.setEnabled(tableMatieres.getSelectedRow() != -1);
+        }
+    });
+        selectedRowTableMatieres = tableMatieres.getSelectedRow();
+         
+    }//GEN-LAST:event_tableMatieresFocusGained
+
+    private void supprimerMatiereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supprimerMatiereMouseClicked
+        if (selectedRowTableMatieres != -1) {
+            Vector rowData = (Vector) tableMat.getDataVector().elementAt(selectedRowTableMatieres);
+            String matiere = rowData.get(0).toString();
+            tableMat.removeRow(selectedRowTableMatieres);
+            try{
+                userConnection.connect();
+                String query = "delete from matieres where nom_matiere = '" + matiere + "'";
+                userConnection.deletefromDB(query);
+                Home.comboBoxMatieres.removeItem(matiere);
+                selectedRowTableMatieres = -1;
+                userConnection.closeConnection();
+            } catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                System.out.println("Cause: " + e.getCause());
+            }
+        }
+    }//GEN-LAST:event_supprimerMatiereMouseClicked
+
+    private void tableMatieresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableMatieresFocusLost
+        tableMatieres.clearSelection();
+    }//GEN-LAST:event_tableMatieresFocusLost
+
+    private void fermerMatieresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fermerMatieresMouseClicked
+        homeFrame.setEnabled(true);
+        this.dispose();
+    }//GEN-LAST:event_fermerMatieresMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        homeFrame.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formHierarchyChanged
+
+    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formPropertyChange
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
 
     /**
      * @param args the command line arguments
@@ -273,7 +427,7 @@ public class Matieres extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Matieres().setVisible(true);
+                new Matieres(homeFrame).setVisible(true);
             }
         });
     }
@@ -281,6 +435,7 @@ public class Matieres extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajouterMatiere;
     private javax.swing.JTextField coefMatiere;
+    private javax.swing.JButton fermerMatieres;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -289,6 +444,7 @@ public class Matieres extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomMatiere;
     private javax.swing.JTextField nomProfMatiere;
+    private javax.swing.JButton supprimerMatiere;
     javax.swing.JTable tableMatieres;
     // End of variables declaration//GEN-END:variables
 }

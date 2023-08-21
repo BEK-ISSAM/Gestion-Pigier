@@ -19,8 +19,8 @@ public class userConnection {
             // db parameters
             String url = "jdbc:sqlite:src/db/pigierDB";
             // create a connection to the database
-            conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
+                conn = DriverManager.getConnection(url);
+                System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -30,8 +30,6 @@ public class userConnection {
           try {
             Statement statement = conn.createStatement();
             statement.executeUpdate(sql);
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
               System.out.println("DB insert Error: " + e.getMessage());
               System.out.println("Cause: " + e.getCause());
@@ -51,10 +49,20 @@ public class userConnection {
         return resultSet;
     }
     
+    public static void deletefromDB(String sql){
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+                System.out.println("DB delete Error: " + e.getMessage());
+                System.out.println("Cause: " + e.getCause());
+            }
+    }
+            
     public static void closeConnection(){
-          try {
+        try {
             conn.close();
-              System.out.println("Connection to SQLite has been closed.");
+            System.out.println("Connection to SQLite has been closed.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

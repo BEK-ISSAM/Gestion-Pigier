@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package loginform;
 import db.userConnection;
 import java.awt.Color;
@@ -16,10 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import student.Home;
 
-/**
- *
- * @author ME1
- */
 public class login extends javax.swing.JFrame {
         String login;
         String login_pwd;
@@ -53,8 +44,6 @@ public class login extends javax.swing.JFrame {
         login_password = new javax.swing.JPasswordField();
         disable = new javax.swing.JLabel();
         show = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel11 = new javax.swing.JLabel();
         LOGIN = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -165,24 +154,6 @@ public class login extends javax.swing.JFrame {
         });
         jPanel2.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 40, 30));
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(199, 226, 255));
-        jCheckBox1.setText("Remember Password");
-        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 261, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(199, 226, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Mot de passe oublier?");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 261, 130, 27));
-
         LOGIN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LOGIN.setForeground(new java.awt.Color(0, 51, 153));
         LOGIN.setText("SE CONNECTER");
@@ -192,7 +163,7 @@ public class login extends javax.swing.JFrame {
                 LOGINActionPerformed(evt);
             }
         });
-        jPanel2.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 306, 341, 40));
+        jPanel2.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 341, 40));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,13 +174,13 @@ public class login extends javax.swing.JFrame {
                 jLabel13MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 100, -1));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 100, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(199, 226, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Vous n'avez pas de compte ? ");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));
 
         lblminimize.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblminimize.setForeground(new java.awt.Color(255, 255, 255));
@@ -284,6 +255,7 @@ public class login extends javax.swing.JFrame {
                 String password = rs.getString("mot_de_passe");
 
                 if (id.equals(login) && password.equals(login_pwd)) {
+                    userConnection.closeConnection();
                     Home home = new Home();
                     home.setVisible(true);
                     home.setLocationRelativeTo(null);
@@ -297,7 +269,6 @@ public class login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        userConnection.closeConnection();
     }//GEN-LAST:event_LOGINActionPerformed
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
@@ -346,10 +317,6 @@ public class login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_login_idActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
         
     }//GEN-LAST:event_login_passwordActionPerformed
@@ -392,9 +359,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LOGIN;
     private javax.swing.JLabel disable;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
